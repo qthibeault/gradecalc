@@ -2,7 +2,7 @@ from functools import reduce
 
 
 def weighted(categories):
-    return sum(category.grade * category.weight for category in categories)
+    return sum(category.percentage * category.weight for category in categories)
 
 
 def points_based(categories):
