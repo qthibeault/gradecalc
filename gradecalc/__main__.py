@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from argparse import ArgumentParser
+from warnings import warn
 
 from schema import Optional, Schema, Use
 from gradecalc.core import Category
@@ -54,11 +55,14 @@ def main():
     grades_file = open(args.file, "r")
     grade_data = _grades_schema.validate(load_yaml(grades_file))
     grades = [Category.fromdict(name, category) for name, category in grade_data.items()]
+    weight = sum(category.weight for category in grades)
+    final_grade = args.scheme(grades)
+
+    if weight != 1.0:
+        warn(f"Provided weights do not sum to 1 (sum={weight}), grade may not be meaningful")
 
     if args.verbose:
         _print_grades(grades)
-
-    final_grade = args.scheme(grades)
 
     print(f"Final grade: {final_grade}")
 
