@@ -7,7 +7,7 @@ from .assignment import Assignment
 
 def _drop_lowest(n, assignments):
     for _ in range(n):
-        lowest_score = min(assignments, key=lambda a: a.grade)
+        lowest_score = min(assignments, key=lambda a: a.percentage)
         assignments = [assignment for assignment in assignments if assignment != lowest_score]
 
     return assignments
@@ -36,6 +36,12 @@ class Category:
     def percentage(self):
         return self.grade.percentage
 
+    def __str__(self):
+        return f"{self.name} ({self.weight}): {self.grade}"
+
+    def drop_lowest(self, n):
+        return Category(self.name, self.weight, _drop_lowest(n, self.assignments))
+
     @weight.validator
     def check_weight(self, attribute, value):
         if value <= 0 or value > 1:
@@ -45,12 +51,6 @@ class Category:
     def check_assignments(self, attribute, value):
         if len(value) == 0:
             raise ValueError("Assignments must not be empty")
-
-    def __str__(self):
-        return f"{self.name} ({self.weight}): {self.grade}"
-
-    def drop_lowest(self, n):
-        return Category(self.name, self.weight, _drop_lowest(n, self.assignments))
 
     @classmethod
     def fromdict(cls, name, data):
