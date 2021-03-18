@@ -30,7 +30,8 @@ class Category:
     @property
     def grade(self):
         assignments = reduce(lambda a, b: a + b, self.assignments)
-        return assignments.grade
+        return Assignment(assignments.score, assignments.total, self.name)
+
 
     @weight.validator
     def check_weight(self, attribute, value):
