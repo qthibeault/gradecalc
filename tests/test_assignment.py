@@ -8,8 +8,8 @@ class AssignmentTestCase(TestCase):
         with self.assertRaises(ValueError):
             Assignment(0, 0)
 
-    def test_grade(self):
-        self.assertEqual(Assignment(10, 20).grade, 0.5)
+    def test_percentage(self):
+        self.assertEqual(Assignment(10, 20).percentage, 0.5)
 
     def test_add(self):
         self.assertEqual(Assignment(10, 10) + Assignment(20, 20), Assignment(30, 30))
