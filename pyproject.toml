@@ -11,11 +11,12 @@ description = "Compute grade for class using YAML files"
 authors = ["Quinn Thibeault <quinn.thibeault96@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = ">=3.6"
-attrs = "*"
-pyyaml = "*"
-schema = "*"
+python = "^3.6"
+attrs = "^20.3.0"
+PyYAML = "^5.4.1"
+schema = "^0.7.4"
 
 [tool.poetry.dev-dependencies]
-black = "*"
+isort = "^5.7.0"
+black = "^20.8b1"
 
