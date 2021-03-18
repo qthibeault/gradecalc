@@ -32,6 +32,9 @@ class Category:
         assignments = reduce(lambda a, b: a + b, self.assignments)
         return Assignment(assignments.score, assignments.total, self.name)
 
+    @property
+    def percentage(self):
+        return self.grade.percentage
 
     @weight.validator
     def check_weight(self, attribute, value):
