@@ -20,6 +20,14 @@ class Category:
     assignments = attrib()
 
     @property
+    def score(self):
+        return sum(assignment.score for assignment in self.assignments)
+
+    @property
+    def total(self):
+        return sum(assignment.total for assignment in self.assignments)
+
+    @property
     def grade(self):
         assignments = reduce(lambda a, b: a + b, self.assignments)
         return assignments.grade
